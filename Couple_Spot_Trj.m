@@ -15,7 +15,7 @@ if (exist(output_path,'dir')==0)                          % 如果文件夹不存在
 end
 output_path = strcat(file_path,'output\');
 %% read Particle trajectories Data
-[filename,pathname]=uigetfile({'*.*','All Files(*.*)'},'Select reference image',...
+[filename,pathname]=uigetfile({'*.*','All Files(*.*)'},'Select Spots in tracks statistics',...
                           input_path);
 raw_data=importdata(strcat(pathname,filename));
 %% init

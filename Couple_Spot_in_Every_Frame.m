@@ -18,7 +18,7 @@ if (exist(output_path,'dir')==0)%如果文件夹不存在
 end
 output_path = strcat(file_path,'output\');
 %% read Particle trajectories Data
-[filename,pathname]=uigetfile({'*.*','All Files(*.*)'},'Select reference image',...
+[filename,pathname]=uigetfile({'*.*','All Files(*.*)'},'Select Spots in tracks statistics',...
                           input_path);
 raw_data=importdata(strcat(pathname,filename));
 %% init
@@ -69,11 +69,11 @@ for i = 0 : total_frame_number     %0-999帧循环
                 continue;
             end
                 if(xs<xd)
-                    Couple_Spot_in_Every_Frame(s,1:7) = [SPOT_ID(source_column_number),TRACK_ID(source_column_number),FRAME(source_column_number),X(source_column_number),-Y(source_column_number),MEAN_INTENSITY(source_column_number),TOTAL_INTENSITY(source_column_number)];
-                    Couple_Spot_in_Every_Frame(s,8:14) = [SPOT_ID(destination_column_number),TRACK_ID(destination_column_number),FRAME(destination_column_number),X(destination_column_number),-Y(destination_column_number),MEAN_INTENSITY(destination_column_number),TOTAL_INTENSITY(destination_column_number)];
+                    Couple_Spot_in_Every_Frame(s,1:8) = [SPOT_ID(source_column_number),FRAME(source_column_number),X(source_column_number),-Y(source_column_number),MEAN_INTENSITY(source_column_number),TOTAL_INTENSITY(source_column_number),TRACK_ID(source_column_number),-1];
+                    Couple_Spot_in_Every_Frame(s,9:16) = [SPOT_ID(destination_column_number),FRAME(destination_column_number),X(destination_column_number),-Y(destination_column_number),MEAN_INTENSITY(destination_column_number),TOTAL_INTENSITY(destination_column_number),TRACK_ID(destination_column_number),-1];
                 else
-                    Couple_Spot_in_Every_Frame(s,1:7) = [SPOT_ID(destination_column_number),TRACK_ID(destination_column_number),FRAME(destination_column_number),X(destination_column_number),-Y(destination_column_number),MEAN_INTENSITY(destination_column_number),TOTAL_INTENSITY(destination_column_number)];
-                    Couple_Spot_in_Every_Frame(s,8:14) = [SPOT_ID(source_column_number),TRACK_ID(source_column_number),FRAME(source_column_number),X(source_column_number),-Y(source_column_number),MEAN_INTENSITY(source_column_number),TOTAL_INTENSITY(source_column_number)];
+                    Couple_Spot_in_Every_Frame(s,1:8) = [SPOT_ID(destination_column_number),FRAME(destination_column_number),X(destination_column_number),-Y(destination_column_number),MEAN_INTENSITY(destination_column_number),TOTAL_INTENSITY(destination_column_number),TRACK_ID(destination_column_number),-1];
+                    Couple_Spot_in_Every_Frame(s,9:16) = [SPOT_ID(source_column_number),FRAME(source_column_number),X(source_column_number),-Y(source_column_number),MEAN_INTENSITY(source_column_number),TOTAL_INTENSITY(source_column_number),TRACK_ID(source_column_number),-1];
                 end
                s = s + 1;
         end
@@ -87,10 +87,10 @@ end
 % % hold on
 % end
 % [m,n] = size(group);
-name1 = [{'UPPER_SPOT_ID'},{'TRACK_ID'},{'FRAME'},{'X'},{'Y'},{'MEAN_INTENSITY'},{'TOTAL_INTENSITY'}];
-name2 = [{'LOWER_SPOT_ID'},{'TRACK_ID'},{'FRAME'},{'X'},{'Y'},{'MEAN_INTENSITY'},{'TOTAL_INTENSITY'}];
+name1 = [{'UPPER_SPOT_ID'},{'FRAME'},{'X'},{'Y'},{'MEAN_INTENSITY'},{'TOTAL_INTENSITY'},{'TRACK_ID'},{'PARTICLE_ID'}];
+name2 = [{'LOWER_SPOT_ID'},{'FRAME'},{'X'},{'Y'},{'MEAN_INTENSITY'},{'TOTAL_INTENSITY'},{'TRACK_ID'},{'PARTICLE_ID'}];
 xlswrite(strcat(output_path,'Couple_Spot_in_Every_Frame.xlsx'),name1,1,'A1');
-xlswrite(strcat(output_path,'Couple_Spot_in_Every_Frame.xlsx'),name2,1,'H1');
+xlswrite(strcat(output_path,'Couple_Spot_in_Every_Frame.xlsx'),name2,1,'I1');
 xlswrite(strcat(output_path,'Couple_Spot_in_Every_Frame.xlsx'),Couple_Spot_in_Every_Frame,1,'A2');
 toc
 

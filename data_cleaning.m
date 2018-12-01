@@ -1,7 +1,7 @@
 function [ ] = data_cleaning(track_result)
 % Filename            :       data_cleaning.m
-% Date                :       2018-`0-12
-% Description         :       Calculate displacement,angle and velocity.
+% Date                :       2018-10-12
+% Description         :       data cleaning.
 %% data cleaning
 %% step1 ?????????????????????????????????
 global total_frame1_number
@@ -17,7 +17,6 @@ temp_row = zeros();
 delete_row =  0;
 count = 0;
 flag = 0;
-k = 1;
 for i = 1:U
     if Diff_u(i) == 1  %计数中
         count = count + 1;
@@ -115,7 +114,6 @@ temp_row = zeros();
 delete_row =  0;
 count = 0;
 flag = 0;
-k = 1;
 for i = 1:V
     if Diff_v(i) == 1  %计数中
         count = count + 1;
@@ -167,7 +165,6 @@ temp_row = zeros();
 delete_row =  0;
 count = 0;
 flag = 0;
-k = 1;
 for i = 1:U
     if Diff_u(i) == 1  %???
         count = count + 1;
@@ -245,7 +242,6 @@ temp_row = zeros();
 delete_row =  0;
 count = 0;
 flag = 0;
-k = 1;
 for i = 1:V
     if Diff_v(i) == 1  %???
         count = count + 1;
