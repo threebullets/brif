@@ -9,16 +9,16 @@ The entire notice above must be reproduced on all authorized copies.
 Author              :       LiuBing 
 Email Address       :       15611662571@163.com
 Filename            :       brif_version.m
-Date                :       2018-12-1
+Date                :       2018-12-8
 Description         :       
 Modification History    :   
-1) Fix a serious bug in Couple_Spot_Trj.m, which causes PARCICLE_ID to be assigned repeatedly
-2) Change output format in Couple_Spot_in_Every_Frame.m to standard file format
-3) Add Couple_Spot_in_Every_Frame in top.m
+1) Adding Custom Function Fitting,e^[(-x/t)^b]
+2) Adding a new set of trajectory screening methods with the number of strong correlation points as the criterion
+3) Adding a visual program to observe the trajectory
 
 
 Data            By          Version         Change Description
 =========================================================================
-18/03/30        LiuBing       1.1                 Fix
+18/12/8        LiuBing       2.0                 Add
 -------------------------------------------------------------------------
 %}

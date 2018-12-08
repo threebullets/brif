@@ -1,4 +1,4 @@
-function [ ] = data_cleaning(track_result)
+function [ step3 ] = data_cleaning(track_result)
 % Filename            :       data_cleaning.m
 % Date                :       2018-10-12
 % Description         :       data cleaning.

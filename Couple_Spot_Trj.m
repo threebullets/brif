@@ -31,14 +31,15 @@ TOTAL_INTENSITY = raw_data.data(:,16);
 TRACK_ID_raw = raw_data.data(:,2);
 TRACK_ID = raw_data.data(:,2)+1;
 [M,N] = size(data);
+o = 1;
 %% couple_trj_group
 tic
 couple_trj_group = zeros();
 global total_frame1_number
 total_frame1_number =max(FRAME1);
 total_frame_number =max(FRAME);
-for i = 0 : total_frame_number                                    % ???????
-    [U,~] = find(FRAME == i);                                     % ???i????spot?????????????U?
+for i = 0 : total_frame_number                                    % 循环每一帧
+    [U,~] = find(FRAME == i);                                     % 找到第i帧中所有的点
     [u,~] = size(U);
     for j = 1 : u                                                 % ?????i?????spot 
         source_column_number = U(j);                              % ???i???j?????????????????????????????source spot?,
@@ -71,8 +72,8 @@ for i = 0 : total_frame_number                                    % ???????
             end
                 track_ID_s = TRACK_ID(U(j));
                 track_ID_d = TRACK_ID(U(k));
-                [ps,qs] = find(couple_trj_group ==track_ID_s);
-                [pd,qd] = find(couple_trj_group ==track_ID_d);
+                [ps,~] = find(couple_trj_group ==track_ID_s);
+                [pd,~] = find(couple_trj_group ==track_ID_d);
                 if(isempty(ps)&&isempty(pd))
                     couple_trj_group(end+1,1) = track_ID_s;
                     couple_trj_group(end,2) = track_ID_d;
@@ -113,8 +114,14 @@ for i = 0 : total_frame_number                                    % ???????
                         couple_trj_group(ps,end+1) = temp_right; 
                     end
                 else
-                    continue;
+                    %continue;
                     %disp('居然sspot和dspot的track_ID之前都存在过！')
+                    if (ps ~= pd)
+                        disp('opps')
+%                     else
+%                         o = o + 1
+                    end
+                    
                 end
         end
     end
@@ -123,7 +130,7 @@ end
 couple_trj_group = couple_trj_group(2:end,:) - 1;
 [u1,v1] = size(couple_trj_group);
 couple_trj_group(:,end+1) = 1:1:u1;
-xlswrite(strcat(output_path,'Couple_Spot_Trj','.xlsx'),couple_trj_group,'couple_trj_group','A1');
+% xlswrite(strcat(output_path,'Couple_Spot_Trj','.xlsx'),couple_trj_group,'couple_trj_group','A1');
 %% couple_trj_group to long_trj_group
 [P,Q] = size(couple_trj_group);
 long_trj_group = zeros(P,Q)-1;
